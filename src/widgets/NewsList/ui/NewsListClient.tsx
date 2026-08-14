@@ -16,7 +16,7 @@ interface NewsListClientProps {
 
 const NewsListClient = ({ news }: NewsListClientProps) => {
   const [articles, setArticles] = useState<NewsArticle[]>(news || []);
-  const [error, setError] = useState<string | null>("");
+  const [error, setError] = useState<string | null>(null);
   const [visibleCount, setVisibleCount] = useState(LIMIT);
   const [selectedArticle, setSelectedArticle] = useState<NewsArticle | null>(null);
   const [loading, setLoading] = useState(false);
@@ -43,10 +43,10 @@ const NewsListClient = ({ news }: NewsListClientProps) => {
         }
       }
     } catch (e) {
-    setError(e instanceof Error ? e.message : 'Ошибка загрузки');  
-  } finally {
-    setIsArticleLoading(false);
-  }
+      setError(e instanceof Error ? e.message : 'Ошибка загрузки');
+    } finally {
+      setLoading(false);  
+    }
   };
 
   useEffect(() => {
