@@ -3,7 +3,12 @@ import Parser from 'rss-parser';
 import * as cheerio from 'cheerio';
 import { NewsArticle } from '../model/types';
 
-const parser = new Parser();
+const parser = new Parser({
+  headers: {
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36',
+    'accept-language': 'ru,en;q=0.9',
+  },
+});
 
 export async function getFullArticleText(url: string): Promise<string> {
   try {
