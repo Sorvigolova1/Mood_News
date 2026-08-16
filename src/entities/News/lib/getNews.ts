@@ -54,7 +54,7 @@ export async function getNews(): Promise<NewsArticle[]> {
 
     return newsWithoutFullText  ;
   } catch (error) {
-   throw new Error('Не удалось загрузить ленту новостей');
-   return [];
+    console.error('getNews REAL:', error);   
+    throw new Error('Не удалось загрузить ленту новостей', { cause: error });
   }
 }
